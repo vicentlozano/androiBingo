@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">bingo</string>
+    <string name="iniciar_nueva_partida">Iniciar nueva partida</string>
+    <string name="nueva_bola">Nueva Bola</string>
+    <string name="empezar">Empezar</string>
+    <string name="linia">Línia</string>
+    <string name="bingo">Bingo</string>
+    <string name="bombo_completo">Bingo completo!</string>
+    <string name="es_bingo">Han cantado Bingo!</string>
+    <string name="numero_cartones">Número de cartones</string>
+    <string name="precio">Precio del carton</string>
+    <string name="continuar">Continuar</string>
+    <string name="porcentajes">          Línia 30% Bingo 70%</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="nueva_partida">Nueva Partida?</string>
+    <string name="cantado_bingo">Han cantado Bingo!</string>
+    <string name="cantar_linia">Han cantado Línia!</string>
+    <string name="linia_correcta">La Línia es correcta?</string>
+    <string name="si">si</string>
+    <string name="no">no</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="porcentajes">
+        <item>       Línia 10%-Bingo 90%</item>
+        <item>       Línia 20%-Bingo 80%</item>
+        <item>       Línia 30%-Bingo 70%</item>
+        <item>       Línia 40%-Bingo 60%</item>
+
+
+        <!-- Agrega más porcentajes aquí si lo necesitas -->
+    </string-array>
+</resources>

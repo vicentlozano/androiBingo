@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/guia_dialogo_ho"
+        app:layout_constraintGuide_percent="0.3"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/guia_dialogo_ve"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mensaje"
+        android:text=""
+        android:textSize="25sp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guia_dialogo_ho"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="25sp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/mensaje"
+        android:id="@+id/tittle"
+        android:text="@string/nueva_partida" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aceptar"
+        android:text="@string/aceptar"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tittle"
+        app:layout_constraintStart_toEndOf="@id/guia_dialogo_ve"
+        android:layout_marginTop="60dp"
+
+        android:layout_marginLeft="30dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelar"
+        android:text="@string/cancelar"
+        android:padding="10dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tittle"
+        app:layout_constraintEnd_toStartOf="@id/guia_dialogo_ve"
+        android:layout_marginTop="60dp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
