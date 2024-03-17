@@ -1,73 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bomboLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/bola_saliente"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="#4CAF50"
-            android:textSize="100sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight = "1"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/Línia"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text = "@string/linia"
-                android:textSize="25sp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/botonNuevaBola"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/boton_bola_nueva"
-                android:text = "@string/nueva_bola"
-                android:textSize="30sp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bingo"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/boton_bola_nueva"
-                android:text = "@string/bingo"
-                android:textSize="25sp" />
-        </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/guia_Horizontal"
+        app:layout_constraintGuide_percent="@dimen/guia_horizontal_position" />
+    <TextView
+        android:id="@+id/bola_saliente"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:text="2"
+        android:alpha="1"
+        android:textSize="90sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bingo_ball" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/manual_automatico"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/automatico"
+        android:textSize="10sp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:id="@+id/boton_nueva_partida"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/nueva_partida1"
+        android:textSize="10sp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:id="@+id/Línia"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guia_Horizontal"
+        android:layout_marginLeft="20dp"
+        android:text = "@string/linia"
+        android:textSize="20sp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonNuevaBola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guia_Horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text = "@string/nueva_bola"
+        android:textSize="20sp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/guia_Horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:background="@drawable/playerplay"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/bingo"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guia_Horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text = "@string/bingo"
+        android:textSize="20sp" />
 
-    </LinearLayout>
 
     <GridLayout
         android:id="@+id/bomboGrid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/guia_Horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:columnCount="10"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
         android:rowCount="9">
 
     </GridLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

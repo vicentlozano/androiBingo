@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFF00"/> <!-- Color de fondo amarillo -->
-    <corners android:radius="250dp"/> <!-- Esquinas redondeadas -->
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#B3000000"/> <!-- Fondo transparente al 70% -->
+            <corners android:radius="10dp"/> <!-- Bordes redondeados -->
+        </shape>
+    </item>
+</selector>

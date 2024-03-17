@@ -1,14 +1,18 @@
 package vilo.dev
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
+import android.speech.tts.TextToSpeech
 import android.view.Gravity
-import android.widget.Button
+import android.view.View
+import android.widget.GridLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.GridLayout
+import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.button.MaterialButton
 import android.widget.TextView as textView
 
@@ -19,7 +23,8 @@ class Bombo : AppCompatActivity() {
     private var arrayBombo = IntArray(90)
     private var arrayTextViews = Array<String?>(90) { null } // Array para guardar el estado de los TextViews
     private var bolaSaliente: String? = null // Variable para guardar el estado del TextView bola_saliente
-
+    private lateinit var textToSpeech: TextToSpeech
+git
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +34,20 @@ class Bombo : AppCompatActivity() {
             precio = savedInstanceState.getDouble("precio")
             seleccion = savedInstanceState.getInt("seleccion")
             arrayBombo = savedInstanceState.getIntArray("arrayBombo") ?: IntArray(90)
-            arrayTextViews = savedInstanceState.getStringArray("arrayTextViews") ?: Array<String?>(90) { null }
+            arrayTextViews =
+                savedInstanceState.getStringArray("arrayTextViews") ?: Array<String?>(90) { null }
             bolaSaliente = savedInstanceState.getString("bolaSaliente")
 
 
-
         }
+
+
         setContentView(R.layout.bombo)
-         numeroCartones = intent.getIntExtra("numeroCartones", 0)
-         precio = intent.getDoubleExtra("precio", 0.0)
-         seleccion = intent.getIntExtra("seleccion", 0)
+        numeroCartones = intent.getIntExtra("numeroCartones", 0)
+        precio = intent.getDoubleExtra("precio", 0.0)
+        seleccion = intent.getIntExtra("seleccion", 0)
         enableEdgeToEdge()
-        premios(numeroCartones,precio,seleccion)
+        premios(numeroCartones, precio, seleccion)
         noventaContenedores()
         for (i in 1..90) {
             val textView = findViewById<textView>(i)
@@ -48,73 +55,53 @@ class Bombo : AppCompatActivity() {
         }
         val botonBombo = findViewById<MaterialButton>(R.id.botonNuevaBola)
         botonBombo.setOnClickListener {
+            val numeroSalida = findViewById<TextView>(R.id.bola_saliente)
+            numeroSalida.visibility = View.VISIBLE // Aquí se cambia la visibilidad a visible
             nunmeroAleatorio()
+
         }
-        val botonBingo = findViewById<MaterialButton>(R.id.bingo)
-        botonBingo.setOnClickListener {
-            val count = arrayBombo.count { it !==0}
-            if (count >= 15){
-            showAlertBingo(getString(R.string.es_bingo))}
+        var isPlaying = false
+        val botonPlayPause = findViewById<MaterialButton>(R.id.play)
+        botonPlayPause.setOnClickListener(){
+            if(isPlaying){
+            botonPlayPause.background = AppCompatResources.getDrawable(this,R.drawable.playerpause)
+                handler.postDelayed(runnable, 4000) // Inicia el cambio automático de la bola
+                isPlaying=false
+            }
+            else{
+                botonPlayPause.background = AppCompatResources.getDrawable(this, R.drawable.playerplay)
+                handler.removeCallbacks(runnable) // Detiene el cambio automático de la bola
+                isPlaying=true
+            }
         }
         val numeroSalida = findViewById<textView>(R.id.bola_saliente)
         numeroSalida.text = bolaSaliente ?: ""
-        //animaciones botonoes bingo y linia
-        val botonLinea: MaterialButton = findViewById(R.id.Línia)
-        botonLinea.setOnClickListener {
-            val count = arrayBombo.count { it != 0 }
-            if (count >= 5) {
-            showAlertLinia()}
+        val botonNuevaPartida = findViewById<MaterialButton>(R.id.boton_nueva_partida)
+        botonNuevaPartida.setOnClickListener{
+            val intent = Intent(this, Configuration:: class.java)
+            startActivity(intent)
         }
-        val handlerLinea = android.os.Handler(Looper.getMainLooper())
-        val runnableLinea = object : Runnable {
-            override fun run() {
-                // Crear y ejecutar la animación para el botón de línea
-                val animacionLinea = ObjectAnimator.ofPropertyValuesHolder(
-                    botonLinea,
-                    PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-                    PropertyValuesHolder.ofFloat("scaleY", 1.2f)
-                ).apply {
-                    duration = 500 // duración en milisegundos
-                    repeatCount = 1
-                    repeatMode = ObjectAnimator.REVERSE
+        val manual_automatico = findViewById<MaterialButton>(R.id.manual_automatico)
+        manual_automatico.setOnClickListener{
+            if(manual_automatico.text==getString(R.string.automatico)) {
+                manual_automatico.text= getString(R.string.manual)
+                //handler.postDelayed(runnable, 4000) // Inicia el cambio automático de la bola
+                botonBombo.visibility = View.GONE
+                botonPlayPause.visibility = View.VISIBLE
+                isPlaying=true
                 }
-                animacionLinea.start()
-
-                // Repetir este Runnable cada 8 segundos
-                handlerLinea.postDelayed(this, 8000)
-            }
-        }
-
-        val handlerBingo = android.os.Handler(Looper.getMainLooper())
-        val runnableBingo = object : Runnable {
-            override fun run() {
-                // Crear y ejecutar la animación para el botón de bingo
-                val animacionBingo = ObjectAnimator.ofPropertyValuesHolder(
-                    botonBingo,
-                    PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-                    PropertyValuesHolder.ofFloat("scaleY", 1.2f)
-                ).apply {
-                    duration = 500 // duración en milisegundos
-                    repeatCount = 1
-                    repeatMode = ObjectAnimator.REVERSE
+                else{
+                    manual_automatico.text = getString(R.string.automatico)
+                handler.removeCallbacks(runnable) // Detiene el cambio automático de la bola
+                botonBombo.visibility = View.VISIBLE
+                botonPlayPause.visibility = View.GONE
                 }
-                animacionBingo.start()
-
-                // Repetir este Runnable cada 8 segundos
-                handlerBingo.postDelayed(this, 8000)
-            }
         }
 
-        // Iniciar los Runnables
-        handlerLinea.post(runnableLinea)
-        handlerBingo.post(runnableBingo)
-            }
 
 
 
-
-
-
+    }
 
 
     private fun noventaContenedores() {
@@ -151,29 +138,16 @@ class Bombo : AppCompatActivity() {
         textView.text = numero.toString()
         val numeroSalida = findViewById<textView>(R.id.bola_saliente)
         numeroSalida.text = numero.toString()
-        if(!arrayBombo.contains(0)){
-          showAlertBingo(getString(R.string.bombo_completo))
 
-        }
+
 
 
     }
-    private fun showAlertBingo(mensage: String){
-        val dialogo = MiDialogoPersonalizado()
 
-            val args = Bundle()
-            args.putString("mensage", mensage)
-            dialogo.arguments = args
-            dialogo.show(supportFragmentManager, "MiDialogoPersonalizado")
-        }
-    private fun showAlertLinia(){
-        val dialogo = MiDialogoPersonalizadoLinia()
-        dialogo.show(supportFragmentManager,"MiDialogoPersonalizadoLinia")
-    }
 
     private fun premios(cartones: Int, precio: Double,porcentaje: Int){
-        val botonLinea = findViewById<Button>(R.id.Línia)
-        val botonBingo = findViewById<Button>(R.id.bingo)
+        val botonLinea = findViewById<TextView>(R.id.Línia)
+        val botonBingo = findViewById<TextView>(R.id.bingo)
         val premioTotal = cartones * precio
         var premioBingo = 0.0
         var premioLinia  = 0.0
@@ -208,5 +182,15 @@ class Bombo : AppCompatActivity() {
         outState.putString("bolaSaliente", numeroSalida.text.toString())
 
     }
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnable = object : Runnable {
+        override fun run() {
+            nunmeroAleatorio()
+            handler.postDelayed(this, 4000) // Ejecuta el Runnable cada 4 segundos
+        }
+    }
+
+
+
 
     }
