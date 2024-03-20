@@ -24,6 +24,7 @@ class Bombo : AppCompatActivity() {
     private var arrayTextViews =
         Array<String?>(90) { null } // Array para guardar el estado de los TextViews
     private var bolaSaliente: String? = null // Variable para guardar el estado del TextView bola_saliente
+    private var isPlaying = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,7 @@ class Bombo : AppCompatActivity() {
         val botonNuevaBola = findViewById<MaterialButton>(R.id.botonNuevaBola)
         val botonPlayPause = findViewById<MaterialButton>(R.id.play)
         val botonAutomaticoManual = findViewById<MaterialButton>(R.id.manual_automatico)
+
         if (savedInstanceState != null) {
             numeroCartones = savedInstanceState.getInt("numeroCartones")
             precio = savedInstanceState.getDouble("precio")
@@ -44,6 +46,8 @@ class Bombo : AppCompatActivity() {
             botonNuevaBola.visibility = savedInstanceState.getInt("botonNuevaBolaVisibility")
             botonPlayPause.visibility = savedInstanceState.getInt("botonPlayPauseVisibility")
             botonAutomaticoManual.text = savedInstanceState.getString("modoActual") ?: getString(R.string.automatico)
+
+
 
 
         }
@@ -58,27 +62,24 @@ class Bombo : AppCompatActivity() {
             val textView = findViewById<textView>(i)
             textView.text = arrayTextViews[i - 1] ?: ""
         }
-        val botonBombo = findViewById<MaterialButton>(R.id.botonNuevaBola)
-        botonBombo.setOnClickListener {
-            val numeroSalida = findViewById<TextView>(R.id.bola_saliente)
+
+        botonNuevaBola.setOnClickListener {
             if(numeroSalida.visibility == View.INVISIBLE){
                 numeroSalida.visibility = View.VISIBLE
             } // Aquí se cambia la visibilidad a visible
 
             if (arrayBombo.contains(0)) {
                 nunmeroAleatorio()
-                var texto = numeroSalida.text.toString()
             }
             else{
-                botonBombo.isEnabled = false
-                botonBombo.text = getString(R.string.bombo_lleno)
+                botonNuevaBola.isEnabled = false
+                botonNuevaBola.text = getString(R.string.bombo_lleno)
             }
 
 
         }
-        var isPlaying = false
-        botonPlayPause.setOnClickListener() {
-            val numeroSalida = findViewById<TextView>(R.id.bola_saliente)
+
+        botonPlayPause.setOnClickListener {
             if(numeroSalida.visibility == View.INVISIBLE){
                 numeroSalida.visibility = View.VISIBLE
             } // Aquí se cambia la visibilidad a visible}
@@ -101,17 +102,20 @@ class Bombo : AppCompatActivity() {
             val intent = Intent(this, Configuration::class.java)
             startActivity(intent)
         }
-        val manual_automatico = findViewById<MaterialButton>(R.id.manual_automatico)
-        manual_automatico.setOnClickListener {
-            if (manual_automatico.text == getString(R.string.automatico) && botonBombo.text != getString(R.string.bombo_lleno)) {
-                manual_automatico.text = getString(R.string.manual)
-                botonBombo.visibility = View.GONE
+
+        botonAutomaticoManual.setOnClickListener {
+            if ( botonAutomaticoManual.text == getString(R.string.automatico) && botonNuevaBola.text != getString(R.string.bombo_lleno)) {
+                botonAutomaticoManual.text = getString(R.string.manual)
+                botonNuevaBola.visibility = View.GONE
                 botonPlayPause.visibility = View.VISIBLE
                 isPlaying = true
+                botonPlayPause.background = AppCompatResources.getDrawable(this, R.drawable.playerplay)
+
             } else {
-                manual_automatico.text = getString(R.string.automatico)
+                botonAutomaticoManual.text = getString(R.string.automatico)
                 handler.removeCallbacks(runnable) // Detiene el cambio automático de la bola
-                botonBombo.visibility = View.VISIBLE
+                botonNuevaBola.visibility = View.VISIBLE
+                botonPlayPause.background = AppCompatResources.getDrawable(this, R.drawable.playerplay)
                 botonPlayPause.visibility = View.GONE
             }
         }
@@ -185,9 +189,8 @@ class Bombo : AppCompatActivity() {
             }
         }
 
-        botonLinea.text = "${getString(R.string.linia)}\n${String.format("%.1f", premioLinia)}"
-        botonBingo.text = "${getString(R.string.bingo)}\n${String.format("%.1f", premioBingo)}"
-
+        botonLinea.text = getString(R.string.linia_con_premio, premioLinia)
+        botonBingo.text = getString(R.string.bingo_con_premio, premioBingo)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -212,13 +215,18 @@ class Bombo : AppCompatActivity() {
         outState.putInt("botonPlayPauseVisibility", botonPlayPause.visibility)
 
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable) // Detiene el Runnable cuando la actividad se destruye
+    }
+
 
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
         override fun run() {
             if(arrayBombo.contains(0)) {
                 nunmeroAleatorio()
-                handler.postDelayed(this, 3000) // Ejecuta el Runnable cada 4 segundos
+                handler.postDelayed(this, 4000) // Ejecuta el Runnable cada 4 segundos
             }
             else{
                 handler.removeCallbacks(this)
