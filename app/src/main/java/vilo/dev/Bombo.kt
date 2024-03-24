@@ -1,22 +1,25 @@
 package vilo.dev
-
-
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.Guideline
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import com.google.android.material.button.MaterialButton
+import androidx.core.view.updateLayoutParams
 
 import android.widget.TextView as textView
 
-class Bombo : AppCompatActivity() {
+class Bombo : BaseActivity() {
     private var numeroCartones: Int = 0
     private var precio: Double = 0.0
     private var seleccion: Int = 0
@@ -119,7 +122,44 @@ class Bombo : AppCompatActivity() {
                 botonPlayPause.visibility = View.GONE
             }
         }
+        //Pantallas movil y horientación horizontal
+        if(orientacion==2 && medidasPantalla<3) {
+            val margenSup = resources.getDimensionPixelSize(R.dimen.top_margin)
+            numeroSalida.updateLayoutParams<ViewGroup.MarginLayoutParams>{
+                topMargin = margenSup
+                //Aqui lo cambiamos direcamente
+                width = resources.getDimensionPixelSize(R.dimen.dimBola)
+                height = resources.getDimensionPixelSize(R.dimen.dimBola)
 
+            }
+            numeroSalida.textSize = 50f
+            val lineaGuiaHorizontal = findViewById<Guideline>(R.id.guia_Horizontal)
+            lineaGuiaHorizontal.setGuidelinePercent(0.45f)
+            val gridLayout = findViewById<GridLayout>(R.id.bomboGrid)
+            gridLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
+                bottomMargin = margenSup
+            }
+            for(i in 1..90){
+                val textView = findViewById<TextView>(i)
+                textView.textSize = 15f
+            }
+
+        }
+        if(orientacion == 1){
+            val lineaGuiaHorizontal = findViewById<Guideline>(R.id.guia_Horizontal)
+            lineaGuiaHorizontal.setGuidelinePercent(0.37f)
+            val margenSup = resources.getDimensionPixelSize(R.dimen.top_margin)
+            numeroSalida.updateLayoutParams<ViewGroup.MarginLayoutParams>{
+                topMargin = resources.getDimensionPixelSize(R.dimen.top_vertical_bola)
+                if(medidasPantalla>3){
+                    width = resources.getDimensionPixelSize(R.dimen.dim_bola_grande)
+                    height = resources.getDimensionPixelSize(R.dimen.dim_bola_grande)
+                    numeroSalida.textSize = 140f
+                }
+            }
+
+        }
 
     }
 

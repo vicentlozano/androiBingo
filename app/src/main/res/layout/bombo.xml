@@ -39,7 +39,7 @@
         android:text="@string/automatico"
         android:textSize="10sp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="50dp"/>
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:text="@string/nueva_partida1"
         android:textSize="10sp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="50dp"/>
     <TextView
         android:id="@+id/Línia"
         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -99,11 +99,12 @@
         app:layout_constraintTop_toBottomOf="@+id/guia_Horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         android:columnCount="10"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="50dp"
-        android:rowCount="9">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp"
+        android:rowCount="9"
+        android:background="@drawable/borde_grid">
 
     </GridLayout>
 

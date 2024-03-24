@@ -1,3 +1,11 @@
 <resources>
-    <dimen name="guia_horizontal_position">0.33</dimen> <!-- Posición predeterminada -->
+    <dimen name="guia_horizontal_position">0.40</dimen> <!-- Posición predeterminada -->
+    <dimen name="margin_bottom">50dp</dimen>
+    <dimen name="top_margin">20dp</dimen>
+    <dimen name="grid_top_margin">10dp</dimen>
+    <dimen name="dimBola">80dp</dimen>
+    <dimen name="dimNumeroBola">50sp</dimen>
+    <dimen name="dimen_textViews_grid">20sp</dimen>
+    <dimen name= "top_vertical_bola">100dp</dimen>
+    <dimen name="dim_bola_grande">220dp</dimen>
 </resources>

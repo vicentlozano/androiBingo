@@ -1,17 +1,22 @@
 package vilo.dev
 
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.google.android.material.button.MaterialButton
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import android.widget.ImageView
+import androidx.core.view.updateLayoutParams
 
-class Configuration : AppCompatActivity() {
+class Configuration : BaseActivity() {
     private var numeroCartones: Int = 0
     private var precio: Double = 0.0
     private var seleccion: Int = 0
@@ -47,6 +52,11 @@ class Configuration : AppCompatActivity() {
                  seleccion = 0
             }
         }
+        val imageView = findViewById<ImageView>(R.id.dinero)
+        Glide.with(this)
+            .load(R.drawable.imagen_dinero)
+            .apply(RequestOptions().circleCrop())
+            .into(imageView)
         val continuarB: MaterialButton = findViewById(R.id.continuar)
         continuarB.setOnClickListener {
             val contenido1Text = contenido1.text.toString()
@@ -71,7 +81,15 @@ class Configuration : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        if(orientacion==2 && medidasPantalla<3) {
+            val marginBottom = resources.getDimensionPixelSize(R.dimen.margin_bottom)
+            continuarB.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = marginBottom
+            }
+            val top = resources.getDimensionPixelSize(R.dimen.top_margin)
+            imageView.updateLayoutParams<ViewGroup.MarginLayoutParams> {topMargin = top }
 
+        }
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
