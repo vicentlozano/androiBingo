@@ -11,22 +11,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_center"
+        android:id="@+id/guideline_center1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/dinero"
-        android:gravity="center"
-        android:src="@drawable/imagen_dinero"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp" />
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+
 
 
     <TextView
@@ -36,9 +36,11 @@
         android:gravity="center"
         android:text="@string/numero_cartones"
         android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/titulo2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline" />
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
+        app:layout_constraintStart_toStartOf="@id/guideline_center1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titulo2"
@@ -47,9 +49,11 @@
         android:layout_height="wrap_content"
         android:text="@string/precio"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titulo1"
-        app:layout_constraintBottom_toTopOf="@+id/guideline" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
+        app:layout_constraintStart_toStartOf="@+id/guideline_center1"
+        app:layout_constraintTop_toBottomOf="@+id/contenido1" />
 
     <EditText
         android:id="@+id/contenido1"
@@ -57,10 +61,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=""
+        android:layout_marginBottom="20dp"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/contenido2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
+        app:layout_constraintStart_toStartOf="@id/guideline_center1"
+        app:layout_constraintTop_toBottomOf="@+id/titulo1" />
 
     <EditText
         android:id="@+id/contenido2"
@@ -69,22 +74,115 @@
         android:gravity="center"
         android:inputType="numberDecimal"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/contenido1"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline_center2"
+        app:layout_constraintStart_toEndOf="@+id/guideline_center1"
+        app:layout_constraintTop_toBottomOf="@+id/titulo2" />
 
-    <Spinner
-    android:id="@+id/spinner"
+    <TextView
+        android:id="@+id/premios"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/porcentaje_premios"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contenido2" />
+
+    <TextView
+        android:id="@+id/velocidad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:entries="@array/porcentajes"
-        app:layout_constraintTop_toBottomOf="@id/contenido2"
+        android:text="@string/velocidad"
+        android:textSize="17sp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        android:layout_marginTop="50dp"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroup" />
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/premios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button1"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20% - 80%" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button2"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25% - 75%" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button3"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30% - 70%" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button4"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="35% - 65%" />
+
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/velocidad"
+        app:layout_constraintEnd_toEndOf="@+id/velocidad"
+        app:layout_constraintStart_toStartOf="@+id/velocidad"
+        android:layout_marginTop="20dp"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button5"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="2s" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button6"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="3s" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button7"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="4s" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button8"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="5s" />
+
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continuar"
@@ -95,7 +193,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_gravity="center"
         android:text="@string/continuar"
-        android:layout_marginBottom="110dp"/>
+        android:layout_marginBottom="80dp"/>
 
 
 

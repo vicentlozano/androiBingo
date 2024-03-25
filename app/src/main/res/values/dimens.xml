@@ -8,4 +8,6 @@
     <dimen name="dimen_textViews_grid">20sp</dimen>
     <dimen name= "top_vertical_bola">100dp</dimen>
     <dimen name="dim_bola_grande">220dp</dimen>
+    <dimen name="dim_config2">180dp</dimen>
+    <dimen name="dim_config">320dp</dimen>
 </resources>

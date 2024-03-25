@@ -9,7 +9,6 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val configuration = resources.configuration
         medidasPantalla= configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
         orientacion = configuration.orientation

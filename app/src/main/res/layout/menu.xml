@@ -19,6 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_gravity="center"
         android:text="@string/iniciar_nueva_partida"
-        android:layout_marginBottom="110dp"/>
+        android:layout_marginBottom="80dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

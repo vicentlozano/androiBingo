@@ -12,17 +12,15 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.Guideline
-import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
 import com.google.android.material.button.MaterialButton
 import androidx.core.view.updateLayoutParams
-
 import android.widget.TextView as textView
 
 class Bombo : BaseActivity() {
     private var numeroCartones: Int = 0
     private var precio: Double = 0.0
     private var seleccion: Int = 0
+    private var miliSeconds: Long = 0
     private var arrayBombo = IntArray(90)
     private var arrayTextViews =
         Array<String?>(90) { null } // Array para guardar el estado de los TextViews
@@ -42,6 +40,7 @@ class Bombo : BaseActivity() {
             numeroCartones = savedInstanceState.getInt("numeroCartones")
             precio = savedInstanceState.getDouble("precio")
             seleccion = savedInstanceState.getInt("seleccion")
+            miliSeconds = savedInstanceState.getLong("miliSeconds")
             arrayBombo = savedInstanceState.getIntArray("arrayBombo") ?: IntArray(90)
             arrayTextViews = savedInstanceState.getStringArray("arrayTextViews") ?: Array<String?>(90) { null }
             bolaSaliente = savedInstanceState.getString("bolaSaliente")
@@ -58,6 +57,7 @@ class Bombo : BaseActivity() {
         numeroCartones = intent.getIntExtra("numeroCartones", 0)
         precio = intent.getDoubleExtra("precio", 0.0)
         seleccion = intent.getIntExtra("seleccion", 0)
+        miliSeconds = intent.getLongExtra("miliSeconds", 3500)
         enableEdgeToEdge()
         premios(numeroCartones, precio, seleccion)
         noventaContenedores()
@@ -89,7 +89,7 @@ class Bombo : BaseActivity() {
             if (isPlaying && arrayBombo.contains(0)) {
                 botonPlayPause.background =
                     AppCompatResources.getDrawable(this, R.drawable.playerpause)
-                handler.postDelayed(runnable, 4000) // Inicia el cambio automático de la bola
+                handler.postDelayed(runnable, miliSeconds) // Inicia el cambio automático de la bola
                 isPlaying = false
 
             } else {
@@ -149,7 +149,6 @@ class Bombo : BaseActivity() {
         if(orientacion == 1){
             val lineaGuiaHorizontal = findViewById<Guideline>(R.id.guia_Horizontal)
             lineaGuiaHorizontal.setGuidelinePercent(0.37f)
-            val margenSup = resources.getDimensionPixelSize(R.dimen.top_margin)
             numeroSalida.updateLayoutParams<ViewGroup.MarginLayoutParams>{
                 topMargin = resources.getDimensionPixelSize(R.dimen.top_vertical_bola)
                 if(medidasPantalla>3){
@@ -239,6 +238,7 @@ class Bombo : BaseActivity() {
         outState.putDouble("precio", precio)
         outState.putInt("seleccion", seleccion)
         outState.putIntArray("arrayBombo", arrayBombo)
+        outState.putLong("miliSeconds",miliSeconds)
         for (i in 1..90) {
             val textView = findViewById<textView>(i)
             arrayTextViews[i - 1] = textView.text.toString()
@@ -266,7 +266,7 @@ class Bombo : BaseActivity() {
         override fun run() {
             if(arrayBombo.contains(0)) {
                 nunmeroAleatorio()
-                handler.postDelayed(this, 4000) // Ejecuta el Runnable cada 4 segundos
+                handler.postDelayed(this, miliSeconds) // Ejecuta el Runnable cada 4 segundos
             }
             else{
                 handler.removeCallbacks(this)

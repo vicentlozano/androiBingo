@@ -25,6 +25,8 @@
     <string name="bombo_lleno">Bombo lleno</string>
     <string name="linia_con_premio">Linia\n%.1f</string>
     <string name="bingo_con_premio">Bingo\n%.1f</string>
+    <string name="porcentaje_premios">Premios</string>
+    <string name="velocidad">Velocidad</string>
 
 
 
