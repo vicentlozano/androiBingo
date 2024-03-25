@@ -1,5 +1,5 @@
 package vilo.dev
-import BaseActivity
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -23,8 +23,8 @@ class Bombo : BaseActivity() {
     private var miliSeconds: Long = 0
     private var arrayBombo = IntArray(90)
     private var arrayTextViews =
-        Array<String?>(90) { null } // Array para guardar el estado de los TextViews
-    private var bolaSaliente: String? = null // Variable para guardar el estado del TextView bola_saliente
+        Array<String?>(90) { null }
+    private var bolaSaliente: String? = null
     private var isPlaying = true
 
 
@@ -69,7 +69,7 @@ class Bombo : BaseActivity() {
         botonNuevaBola.setOnClickListener {
             if(numeroSalida.visibility == View.INVISIBLE){
                 numeroSalida.visibility = View.VISIBLE
-            } // Aquí se cambia la visibilidad a visible
+            }
 
             if (arrayBombo.contains(0)) {
                 nunmeroAleatorio()
@@ -85,17 +85,17 @@ class Bombo : BaseActivity() {
         botonPlayPause.setOnClickListener {
             if(numeroSalida.visibility == View.INVISIBLE){
                 numeroSalida.visibility = View.VISIBLE
-            } // Aquí se cambia la visibilidad a visible}
+            }
             if (isPlaying && arrayBombo.contains(0)) {
                 botonPlayPause.background =
                     AppCompatResources.getDrawable(this, R.drawable.playerpause)
-                handler.postDelayed(runnable, miliSeconds) // Inicia el cambio automático de la bola
+                handler.postDelayed(runnable, miliSeconds)
                 isPlaying = false
 
             } else {
                 botonPlayPause.background =
                     AppCompatResources.getDrawable(this, R.drawable.playerplay)
-                handler.removeCallbacks(runnable) // Detiene el cambio automático de la bola
+                handler.removeCallbacks(runnable)
                 isPlaying = true
             }
         }
@@ -116,18 +116,17 @@ class Bombo : BaseActivity() {
 
             } else {
                 botonAutomaticoManual.text = getString(R.string.automatico)
-                handler.removeCallbacks(runnable) // Detiene el cambio automático de la bola
+                handler.removeCallbacks(runnable)
                 botonNuevaBola.visibility = View.VISIBLE
                 botonPlayPause.background = AppCompatResources.getDrawable(this, R.drawable.playerplay)
                 botonPlayPause.visibility = View.GONE
             }
         }
-        //Pantallas movil y horientación horizontal
+
         if(orientacion==2 && medidasPantalla<3) {
             val margenSup = resources.getDimensionPixelSize(R.dimen.top_margin)
             numeroSalida.updateLayoutParams<ViewGroup.MarginLayoutParams>{
                 topMargin = margenSup
-                //Aqui lo cambiamos direcamente
                 width = resources.getDimensionPixelSize(R.dimen.dimBola)
                 height = resources.getDimensionPixelSize(R.dimen.dimBola)
 
@@ -257,7 +256,7 @@ class Bombo : BaseActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        handler.removeCallbacks(runnable) // Detiene el Runnable cuando la actividad se destruye
+        handler.removeCallbacks(runnable)
     }
 
 
@@ -266,7 +265,7 @@ class Bombo : BaseActivity() {
         override fun run() {
             if(arrayBombo.contains(0)) {
                 nunmeroAleatorio()
-                handler.postDelayed(this, miliSeconds) // Ejecuta el Runnable cada 4 segundos
+                handler.postDelayed(this, miliSeconds)
             }
             else{
                 handler.removeCallbacks(this)

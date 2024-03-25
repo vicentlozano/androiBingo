@@ -1,12 +1,13 @@
 package vilo.dev
 
-import BaseActivity
+
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.constraintlayout.widget.Guideline
 import com.google.android.material.button.MaterialButton
@@ -68,10 +69,11 @@ class Configuration : BaseActivity() {
                     intent.putExtra("miliSeconds", miliSeconds)
                     startActivity(intent)
                 } catch (e: NumberFormatException) {
-                    // Manejar el caso cuando el texto no puede ser convertido a un número
+                    Toast.makeText(this, "Error: entrada no válida", Toast.LENGTH_SHORT).show()
+
                 }
             } else {
-                // Manejar el caso cuando el EditText está vacío
+
                 val intent = Intent(this, Bombo::class.java)
                 intent.putExtra("numeroCartones", 0)
                 intent.putExtra("precio", 0.0)

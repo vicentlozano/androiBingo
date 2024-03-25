@@ -1,5 +1,5 @@
 package vilo.dev
-import BaseActivity
+
 import android.os.Bundle
 import android.content.Intent
 import android.view.ViewGroup

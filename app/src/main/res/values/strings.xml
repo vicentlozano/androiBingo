@@ -1,33 +1,30 @@
 <resources>
     <string name="app_name">bingo</string>
-    <string name="iniciar_nueva_partida">nueva partida</string>
-    <string name="nueva_bola">Nueva Bola</string>
-    <string name="empezar">Empezar</string>
-    <string name="linia">Línia</string>
+    <string name="iniciar_nueva_partida">new game</string>
+    <string name="nueva_bola">New Ball</string>
+    <string name="empezar">Start</string>
+    <string name="linia">Line</string>
     <string name="bingo">Bingo</string>
-    <string name="bombo_completo">Bingo completo!</string>
-    <string name="es_bingo">Han cantado Bingo!</string>
-    <string name="numero_cartones">Número de cartones</string>
-    <string name="precio">Precio del carton</string>
-    <string name="continuar">Continuar</string>
-    <string name="porcentajes">          Línia 30% Bingo 70%</string>
-    <string name="aceptar">Aceptar</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="nueva_partida">Nueva Partida?</string>
-    <string name="cantado_bingo">Han cantado Bingo!</string>
-    <string name="cantar_linia">Han cantado Línia!</string>
-    <string name="linia_correcta">La Línia es correcta?</string>
-    <string name="si">si</string>
+    <string name="bombo_completo">Bingo complete!</string>
+    <string name="es_bingo">They called Bingo!</string>
+    <string name="numero_cartones">Number of cards</string>
+    <string name="precio">Price of the card</string>
+    <string name="continuar">Continue</string>
+    <string name="porcentajes">Line 30% Bingo 70%</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
+    <string name="nueva_partida">New Game?</string>
+    <string name="cantado_bingo">They called Bingo!</string>
+    <string name="cantar_linia">They called Line!</string>
+    <string name="linia_correcta">Is the Line correct?</string>
+    <string name="si">yes</string>
     <string name="no">no</string>
-    <string name="nueva_partida1">Nueva Partida</string>
+    <string name="nueva_partida1">New Game</string>
     <string name="manual">Manual</string>
-    <string name="automatico">Automático</string>
-    <string name="bombo_lleno">Bombo lleno</string>
-    <string name="linia_con_premio">Linia\n%.1f</string>
+    <string name="automatico">Automatic</string>
+    <string name="bombo_lleno">Full drum</string>
+    <string name="linia_con_premio">Line\n%.1f</string>
     <string name="bingo_con_premio">Bingo\n%.1f</string>
-    <string name="porcentaje_premios">Premios</string>
-    <string name="velocidad">Velocidad</string>
-
-
-
+    <string name="porcentaje_premios">Prizes</string>
+    <string name="velocidad">Speed</string>
 </resources>
