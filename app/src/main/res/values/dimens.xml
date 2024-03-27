@@ -10,4 +10,6 @@
     <dimen name="dim_bola_grande">220dp</dimen>
     <dimen name="dim_config2">180dp</dimen>
     <dimen name="dim_config">320dp</dimen>
+    <dimen name="pantallas_media">30dp</dimen>
+    <dimen name="boton_principio">35dp</dimen>
 </resources>

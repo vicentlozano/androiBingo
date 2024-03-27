@@ -55,14 +55,14 @@ class Bombo : BaseActivity() {
             this,
             params,
             {
-                // Si el consentimiento ha sido obtenido, inicializa MobileAds y carga los anuncios
+
                 if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
                     isConsentObtained.set(true)
                     loadAds()
                 }
             },
             { requestConsentError ->
-                // Maneja el error en la solicitud de la información de consentimiento
+
                 Log.w(TAG, String.format("%s: %s", requestConsentError.errorCode, requestConsentError.message))
             }
         )
@@ -138,17 +138,17 @@ class Bombo : BaseActivity() {
         numeroSalida.text = bolaSaliente ?: ""
         val botonNuevaPartida = findViewById<MaterialButton>(R.id.boton_nueva_partida)
         botonNuevaPartida.setOnClickListener {
-            // Verifica el estado del consentimiento antes de mostrar el anuncio
+
             if (isConsentObtained.get() && mInterstitialAd != null) {
                 mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
-                        // Called when ad is dismissed.
+
                         Log.d(tag, "Ad dismissed fullscreen content.")
                         mInterstitialAd = null
                         val intent = Intent(this@Bombo, Configuration::class.java)
                         startActivity(intent)
                     }
-                    // ... other methods ...
+
                 }
                 mInterstitialAd?.show(this@Bombo)
             } else {
@@ -175,12 +175,12 @@ class Bombo : BaseActivity() {
         }
         mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
             override fun onAdClicked() {
-                // Called when a click is recorded for an ad.
+
                 Log.d(tag, "Ad was clicked.")
             }
 
             override fun onAdDismissedFullScreenContent() {
-                // Called when ad is dismissed.
+
                 Log.d(tag, "Ad dismissed fullscreen content.")
                 mInterstitialAd = null
             }
@@ -188,12 +188,12 @@ class Bombo : BaseActivity() {
 
 
             override fun onAdImpression() {
-                // Called when an impression is recorded for an ad.
+
                 Log.d(tag, "Ad recorded an impression.")
             }
 
             override fun onAdShowedFullScreenContent() {
-                // Called when ad is shown.
+
                 Log.d(tag, "Ad showed fullscreen content.")
             }
         }
@@ -218,6 +218,11 @@ class Bombo : BaseActivity() {
                 val textView = findViewById<TextView>(i)
                 textView.textSize = 15f
             }
+            val bomboLayout1 = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.bomboLayout)
+            bomboLayout1.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+                rightMargin =  resources.getDimensionPixelSize(R.dimen.pantallas_media)
+            }
 
         }
         if(orientacion == 1){
@@ -235,11 +240,11 @@ class Bombo : BaseActivity() {
         }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Verifica el estado del consentimiento antes de mostrar el anuncio
+
                 if (isConsentObtained.get() && mInterstitialAd != null) {
                     mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
-                            // Called when ad is dismissed.
+
                             Log.d(tag, "Ad dismissed fullscreen content.")
                             mInterstitialAd = null
                             if (isEnabled) {
@@ -248,7 +253,7 @@ class Bombo : BaseActivity() {
                                 startActivity(intent)
                             }
                         }
-                        // ... other methods ...
+
                     }
                     mInterstitialAd?.show(this@Bombo)
                 } else {
@@ -303,7 +308,7 @@ class Bombo : BaseActivity() {
     private fun loadAds() {
         val adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-5781262120594788/7291504299", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d(tag, adError.toString() )
                 mInterstitialAd = null

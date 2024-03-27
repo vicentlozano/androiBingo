@@ -15,7 +15,7 @@ class MainActivity :  BaseActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.menu)
-        // Create a ConsentRequestParameters object.
+
         val params = ConsentRequestParameters
             .Builder()
             .build()
@@ -28,7 +28,7 @@ class MainActivity :  BaseActivity() {
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(
                     this@MainActivity
                 ) { loadAndShowError ->
-                    // Consent gathering failed.
+
                     Log.w(
                         TAG, String.format(
                             "%s: %s",
@@ -37,11 +37,11 @@ class MainActivity :  BaseActivity() {
                         )
                     )
 
-                    // Consent has been gathered.
+
                 }
             },
             { requestConsentError ->
-                // Consent gathering failed.
+
                 Log.w(TAG, String.format("%s: %s",
                     requestConsentError.errorCode,
                     requestConsentError.message))
@@ -54,7 +54,7 @@ class MainActivity :  BaseActivity() {
             startActivity(intent)
         }
         if(orientacion==2 && medidasPantalla<3) {
-            val marginBottom = resources.getDimensionPixelSize(R.dimen.margin_bottom)
+            val marginBottom = resources.getDimensionPixelSize(R.dimen.boton_principio)
             botonInicio.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = marginBottom
             }

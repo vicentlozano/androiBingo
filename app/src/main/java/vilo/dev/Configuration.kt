@@ -2,13 +2,14 @@ package vilo.dev
 
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.Guideline
 import com.google.android.material.button.MaterialButton
 import androidx.core.view.updateLayoutParams
@@ -82,22 +83,62 @@ class Configuration : BaseActivity() {
                 startActivity(intent)
             }
         }
-        if(medidasPantalla<3) {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val guia1 : Guideline = findViewById(R.id.guideline_center1)
+        val guia2 : Guideline = findViewById(R.id.guideline_center2)
+        val tituloCartones:TextView = findViewById(R.id.titulo1)
+
+        if(orientacion ==2 && medidasPantalla<3) {
+            tituloCartones.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+            }
+            continuarB.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = resources.getDimensionPixelSize(R.dimen.boton_principio)
+            }
+            guia1.setGuidelinePercent(0.0f)
+            guia2.setGuidelinePercent(0.5f)
+            tituloCartones.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+            }
+            val prem:TextView = findViewById(R.id.premios)
+            prem.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
+            }
+            val vel:TextView = findViewById(R.id.velocidad)
+            vel.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
+            }
+            val constraintLayout: ConstraintLayout = findViewById(R.id.constraint_confi)
+            val constraintSet = ConstraintSet()
+            constraintSet.clone(constraintLayout)
+            constraintSet.connect(R.id.titulo2, ConstraintSet.START, R.id.guideline_center2, ConstraintSet.START, 100)
+            constraintSet.connect(R.id.titulo2, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 100)
+            constraintSet.connect(R.id.titulo2, ConstraintSet.TOP, R.id.titulo1, ConstraintSet.TOP, 0)
+            constraintSet.connect(R.id.contenido2, ConstraintSet.START, R.id.guideline_center2, ConstraintSet.START, 100)
+            constraintSet.connect(R.id.contenido2, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 100)
+            constraintSet.setMargin(R.id.titulo1,ConstraintSet.START,100)
+            constraintSet.setMargin(R.id.titulo1,ConstraintSet.END,100)
+            constraintSet.setMargin(R.id.contenido1,ConstraintSet.START,100)
+            constraintSet.setMargin(R.id.contenido1,ConstraintSet.END,100)
+            constraintSet.applyTo(constraintLayout)
+
+
+
         }
         if(orientacion==1 && medidasPantalla>2){
-            val tituloCartones:TextView = findViewById(R.id.titulo1)
-            tituloCartones.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            tituloCartones.updateLayoutParams<MarginLayoutParams> {
                 topMargin = resources.getDimensionPixelSize(R.dimen.dim_config)
             }
         }
+        if(medidasPantalla<2){
+            tituloCartones.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+            }
+        }
         if(orientacion==1 && medidasPantalla<3){
-            val guia1 : Guideline = findViewById(R.id.guideline_center1)
-            val guia2 : Guideline = findViewById(R.id.guideline_center2)
+
             guia1.setGuidelinePercent(0.1f)
             guia2.setGuidelinePercent(0.9f)
-            val tituloCartones:TextView = findViewById(R.id.titulo1)
-            tituloCartones.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            tituloCartones.updateLayoutParams<MarginLayoutParams> {
                 topMargin = resources.getDimensionPixelSize(R.dimen.dim_config2)
             }
             val porcen : MaterialButton = findViewById(R.id.button1)
