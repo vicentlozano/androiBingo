@@ -142,13 +142,13 @@ class Configuration : BaseActivity() {
                 topMargin = resources.getDimensionPixelSize(R.dimen.dim_config2)
             }
             val porcen : MaterialButton = findViewById(R.id.button1)
-            porcen.setPadding(2, 5, 2, 5) // Cambia el padding aquí
+            porcen.setPadding(2, 5, 2, 5)
             val porcen1 : MaterialButton = findViewById(R.id.button2)
-            porcen1.setPadding(2, 5, 2, 5) // Cambia el padding aquí
+            porcen1.setPadding(2, 5, 2, 5)
             val porcen2 : MaterialButton = findViewById(R.id.button3)
-            porcen2.setPadding(2, 5, 2, 5) // Cambia el padding aquí
+            porcen2.setPadding(2, 5, 2, 5)
             val porcen3 : MaterialButton = findViewById(R.id.button4)
-            porcen3.setPadding(2, 5, 2, 5) // Cambia el padding aquí
+            porcen3.setPadding(2, 5, 2, 5)
         }
     }
     override fun onSaveInstanceState(outState: Bundle) {

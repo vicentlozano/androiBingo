@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import com.google.android.ump.*
 
@@ -59,5 +60,10 @@ class MainActivity :  BaseActivity() {
                 bottomMargin = marginBottom
             }
         }
+        if(orientacion ==1 && medidasPantalla<3){
+            val miImagen = findViewById<ImageView>(R.id.imagen_fondo)
+            miImagen.setImageResource(R.drawable.imagen_bingo169)
+        }
+
     }
 }

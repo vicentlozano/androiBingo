@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bingo</string>
+    <string name="app_name">Bingo Drum</string>
     <string name="iniciar_nueva_partida">new game</string>
     <string name="nueva_bola">New Ball</string>
     <string name="empezar">Start</string>
@@ -27,4 +27,5 @@
     <string name="bingo_con_premio">Bingo\n%.1f</string>
     <string name="porcentaje_premios">Prizes</string>
     <string name="velocidad">Speed</string>
+
 </resources>

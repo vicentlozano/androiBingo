@@ -308,7 +308,7 @@ class Bombo : BaseActivity() {
     private fun loadAds() {
         val adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(this,"ca-app-pub-5781262120594788/7291504299", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d(tag, adError.toString() )
                 mInterstitialAd = null
