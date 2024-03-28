@@ -21,14 +21,14 @@
         android:gravity="center"
         android:text="2"
         android:alpha="1"
-        android:textSize="90sp"
+        android:textSize="83sp"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bingo_ball" />
+        android:background="@drawable/fonfo_bola" />
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

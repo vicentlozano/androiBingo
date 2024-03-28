@@ -233,7 +233,7 @@ class Bombo : BaseActivity() {
                 if(medidasPantalla>3){
                     width = resources.getDimensionPixelSize(R.dimen.dim_bola_grande)
                     height = resources.getDimensionPixelSize(R.dimen.dim_bola_grande)
-                    numeroSalida.textSize = 140f
+                    numeroSalida.textSize = 120f
                 }
             }
 
