@@ -7,11 +7,12 @@ android {
     namespace = "vilo.dev"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "vilo.dev"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -47,6 +48,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {

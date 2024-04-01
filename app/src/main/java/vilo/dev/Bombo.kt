@@ -2,6 +2,8 @@ package vilo.dev
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,6 +17,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.Guideline
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.button.MaterialButton
 import androidx.core.view.updateLayoutParams
 import com.google.android.gms.ads.AdRequest
@@ -43,6 +46,7 @@ class Bombo : BaseActivity() {
     private  val tag = "Bombo"
     private lateinit var consentInformation: ConsentInformation
     private var isConsentObtained = AtomicBoolean(false)
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,10 +88,6 @@ class Bombo : BaseActivity() {
             botonNuevaBola.visibility = savedInstanceState.getInt("botonNuevaBolaVisibility")
             botonPlayPause.visibility = savedInstanceState.getInt("botonPlayPauseVisibility")
             botonAutomaticoManual.text = savedInstanceState.getString("modoActual") ?: getString(R.string.automatico)
-
-
-
-
         }
 
         numeroCartones = intent.getIntExtra("numeroCartones", 0)
@@ -97,15 +97,11 @@ class Bombo : BaseActivity() {
         enableEdgeToEdge()
         premios(numeroCartones, precio, seleccion)
         noventaContenedores()
-        for (i in 1..90) {
-            val textView = findViewById<textView>(i)
-            textView.text = arrayTextViews[i - 1] ?: ""
-        }
+        updateTextViewsBackground(arrayTextViews,bolaSaliente)
+
 
         botonNuevaBola.setOnClickListener {
-            if(numeroSalida.visibility == View.INVISIBLE){
-                numeroSalida.visibility = View.VISIBLE
-            }
+
 
             if (arrayBombo.contains(0)) {
                 nunmeroAleatorio()
@@ -119,9 +115,6 @@ class Bombo : BaseActivity() {
         }
 
         botonPlayPause.setOnClickListener {
-            if(numeroSalida.visibility == View.INVISIBLE){
-                numeroSalida.visibility = View.VISIBLE
-            }
             if (isPlaying && arrayBombo.contains(0)) {
                 botonPlayPause.background =
                     AppCompatResources.getDrawable(this, R.drawable.playerpause)
@@ -269,14 +262,34 @@ class Bombo : BaseActivity() {
 
     }
 
+    private fun updateTextViewsBackground(arrayTextViews: Array<String?>, bolaSaliente: String?) {
+        for (i in 1..90) {
+            val textView = findViewById<textView>(i)
+            textView.text = arrayTextViews[i - 1] ?: ""
+            if (textView.text.isNotEmpty()) {
+                textView.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.rounded_blue, theme)
+            }
+        }
+        if (bolaSaliente?.isNotEmpty() == true) {
+            val id = bolaSaliente.toInt()
+            val textView = findViewById<textView>(id)
+            if (textView != null) {
+
+                textView.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.rounded_purple, theme)
+
+            }
+
+        }
+    }
 
     private fun noventaContenedores() {
         for (i in 1..90) {
             val gridLayout = findViewById<GridLayout>(R.id.bomboGrid)
             val textView = textView(this)
             val layoutParams = GridLayout.LayoutParams()
-            textView.layoutParams = GridLayout.LayoutParams()
-            textView.text = ""
+            val botonNuevaBola = findViewById<MaterialButton>(R.id.botonNuevaBola)
             textView.gravity = Gravity.CENTER
             textView.id = i
             textView.textSize = 20f
@@ -286,6 +299,13 @@ class Bombo : BaseActivity() {
             layoutParams.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
             layoutParams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
             textView.layoutParams = layoutParams
+            textView.setTextColor(Color.WHITE)
+            textView.setTypeface(textView.typeface, Typeface.BOLD)
+            if (botonNuevaBola.currentTextColor == Color.WHITE) {
+                textView.background = AppCompatResources.getDrawable(this, R.drawable.rounded_grey)
+            } else {
+                textView.background = AppCompatResources.getDrawable(this, R.drawable.rounded_carbon)
+            }
             gridLayout.addView(textView)
 
         }
@@ -298,11 +318,13 @@ class Bombo : BaseActivity() {
             numero = (1..90).random()
         }
         arrayBombo[numero - 1] = numero
+        arrayTextViews[numero - 1] = numero.toString() // Actualizar arrayTextViews
         val textView = findViewById<textView>(numero)
         textView.text = numero.toString()
+        textView.background = AppCompatResources.getDrawable(this, R.drawable.rounded_blue)
         val numeroSalida = findViewById<textView>(R.id.bola_saliente)
         numeroSalida.text = numero.toString()
-
+        updateTextViewsBackground(arrayTextViews, numeroSalida.text.toString())
 
     }
     private fun loadAds() {
@@ -361,7 +383,7 @@ class Bombo : BaseActivity() {
         outState.putIntArray("arrayBombo", arrayBombo)
         outState.putLong("miliSeconds",miliSeconds)
         for (i in 1..90) {
-            val textView = findViewById<textView>(i)
+            val textView = findViewById<TextView>(i)
             arrayTextViews[i - 1] = textView.text.toString()
         }
         outState.putStringArray("arrayTextViews", arrayTextViews)
@@ -374,6 +396,7 @@ class Bombo : BaseActivity() {
         outState.putString("modoActual",botonAutomaticoManual.text.toString())
         val botonPlayPause = findViewById<MaterialButton>(R.id.play)
         outState.putInt("botonPlayPauseVisibility", botonPlayPause.visibility)
+
 
     }
 
