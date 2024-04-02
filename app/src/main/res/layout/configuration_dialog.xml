@@ -28,64 +28,45 @@
         app:layout_constraintGuide_percent="0.65" />
 
 
-
-
-
-    <TextView
-        android:id="@+id/titulo1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/numero_cartones"
-        android:textSize="17sp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
-        app:layout_constraintStart_toStartOf="@id/guideline_center1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titulo2"
-        android:layout_width="0dp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/precio"
-        android:textSize="17sp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
-        app:layout_constraintStart_toStartOf="@+id/guideline_center1"
-        app:layout_constraintTop_toBottomOf="@+id/contenido1" />
-
     <EditText
         android:id="@+id/contenido1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:gravity="center"
         android:text=""
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_center2"
-        app:layout_constraintStart_toStartOf="@id/guideline_center1"
-        app:layout_constraintTop_toBottomOf="@+id/titulo1" />
+        android:hint="@string/description_contenido1"
+        android:autofillHints="number of cards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/contenido2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:gravity="center"
         android:inputType="numberDecimal"
+        android:hint="@string/description_contenido2"
+        android:autofillHints="number"
         android:text=""
         android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toStartOf="@id/guideline_center2"
-        app:layout_constraintStart_toEndOf="@+id/guideline_center1"
-        app:layout_constraintTop_toBottomOf="@+id/titulo2" />
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contenido1" />
 
     <TextView
         android:id="@+id/premios"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/porcentaje_premios"
         android:textSize="17sp"
@@ -100,7 +81,7 @@
         android:gravity="center"
         android:text="@string/velocidad"
         android:textSize="17sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroup" />
@@ -195,6 +176,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_gravity="center"
         android:text="@string/continuar"
+        android:textColor="@color/design_default_color_on_primary"
         android:layout_marginBottom="80dp"/>
 
 

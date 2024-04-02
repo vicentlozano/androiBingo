@@ -7,6 +7,7 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -19,7 +20,7 @@ class Configuration : BaseActivity() {
     private var numeroCartones: Int = 0
     private var precio: Double = 0.0
     private var seleccion: Int = 0
-    private var miliSeconds: Long = 0
+    private var miliSeconds: Long = 3500
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -83,64 +84,49 @@ class Configuration : BaseActivity() {
                 startActivity(intent)
             }
         }
-        val guia1 : Guideline = findViewById(R.id.guideline_center1)
-        val guia2 : Guideline = findViewById(R.id.guideline_center2)
-        val tituloCartones:TextView = findViewById(R.id.titulo1)
-
+        val guia1: Guideline = findViewById(R.id.guideline_center1)
+        val guia2: Guideline = findViewById(R.id.guideline_center2)
+        val prem: TextView = findViewById(R.id.premios)
+        val vel: TextView = findViewById(R.id.velocidad)
         if(orientacion ==2 && medidasPantalla<3) {
-            tituloCartones.updateLayoutParams<MarginLayoutParams> {
-                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
-            }
+
             continuarB.updateLayoutParams<MarginLayoutParams> {
-                bottomMargin = resources.getDimensionPixelSize(R.dimen.boton_principio)
+                bottomMargin = resources.getDimensionPixelSize(R.dimen.boton_principio1)
             }
-            guia1.setGuidelinePercent(0.0f)
-            guia2.setGuidelinePercent(0.5f)
-            tituloCartones.updateLayoutParams<MarginLayoutParams> {
-                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+
+            contenido1.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.boton_principio)
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config4)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config4)
             }
-            val prem:TextView = findViewById(R.id.premios)
+            contenido2.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config4)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config4)
+            }
+
             prem.updateLayoutParams<MarginLayoutParams> {
                 topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
             }
-            val vel:TextView = findViewById(R.id.velocidad)
             vel.updateLayoutParams<MarginLayoutParams> {
                 topMargin = resources.getDimensionPixelSize(R.dimen.grid_top_margin)
             }
-            val constraintLayout: ConstraintLayout = findViewById(R.id.constraint_confi)
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(constraintLayout)
-            constraintSet.connect(R.id.titulo2, ConstraintSet.START, R.id.guideline_center2, ConstraintSet.START, 100)
-            constraintSet.connect(R.id.titulo2, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 100)
-            constraintSet.connect(R.id.titulo2, ConstraintSet.TOP, R.id.titulo1, ConstraintSet.TOP, 0)
-            constraintSet.connect(R.id.contenido2, ConstraintSet.START, R.id.guideline_center2, ConstraintSet.START, 100)
-            constraintSet.connect(R.id.contenido2, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 100)
-            constraintSet.setMargin(R.id.titulo1,ConstraintSet.START,100)
-            constraintSet.setMargin(R.id.titulo1,ConstraintSet.END,100)
-            constraintSet.setMargin(R.id.contenido1,ConstraintSet.START,100)
-            constraintSet.setMargin(R.id.contenido1,ConstraintSet.END,100)
-            constraintSet.applyTo(constraintLayout)
-
-
-
-        }
-        if(orientacion==1 && medidasPantalla>2){
-            tituloCartones.updateLayoutParams<MarginLayoutParams> {
-                topMargin = resources.getDimensionPixelSize(R.dimen.dim_config)
+            toggleGroup.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.top_margin_grupo)
             }
-        }
-        if(medidasPantalla<2){
-            tituloCartones.updateLayoutParams<MarginLayoutParams> {
-                topMargin = resources.getDimensionPixelSize(R.dimen.pantallas_media)
+            toggleGroup2.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.top_margin_grupo)
             }
+
+
         }
+
+
         if(orientacion==1 && medidasPantalla<3){
 
             guia1.setGuidelinePercent(0.1f)
             guia2.setGuidelinePercent(0.9f)
-            tituloCartones.updateLayoutParams<MarginLayoutParams> {
-                topMargin = resources.getDimensionPixelSize(R.dimen.dim_config2)
-            }
+
             val porcen : MaterialButton = findViewById(R.id.button1)
             porcen.setPadding(2, 5, 2, 5)
             val porcen1 : MaterialButton = findViewById(R.id.button2)
@@ -150,6 +136,37 @@ class Configuration : BaseActivity() {
             val porcen3 : MaterialButton = findViewById(R.id.button4)
             porcen3.setPadding(2, 5, 2, 5)
         }
+        if(orientacion==1 && medidasPantalla>2){
+            contenido1.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.dim_config1)
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config2)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config2)
+            }
+            contenido2.updateLayoutParams<MarginLayoutParams> {
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config2)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config2)
+            }
+        }
+        if(orientacion==2 && medidasPantalla>2){
+            contenido1.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.top_margin_number)
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config3 )
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config3 )
+            }
+            contenido2.updateLayoutParams<MarginLayoutParams> {
+                marginStart = resources.getDimensionPixelSize(R.dimen.dim_config3)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.dim_config3 )
+                topMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom)
+            }
+            prem.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom)
+            }
+            vel.updateLayoutParams<MarginLayoutParams> {
+                topMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom)
+            }
+        }
+
+
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

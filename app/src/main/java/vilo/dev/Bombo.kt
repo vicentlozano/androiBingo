@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.button.MaterialButton
@@ -80,7 +81,7 @@ class Bombo : BaseActivity() {
             numeroCartones = savedInstanceState.getInt("numeroCartones")
             precio = savedInstanceState.getDouble("precio")
             seleccion = savedInstanceState.getInt("seleccion")
-            miliSeconds = savedInstanceState.getLong("miliSeconds")
+            miliSeconds = savedInstanceState.getLong("miliSeconds",3500)
             arrayBombo = savedInstanceState.getIntArray("arrayBombo") ?: IntArray(90)
             arrayTextViews = savedInstanceState.getStringArray("arrayTextViews") ?: Array(90) { null }
             bolaSaliente = savedInstanceState.getString("bolaSaliente")

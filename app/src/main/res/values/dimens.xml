@@ -7,9 +7,15 @@
     <dimen name="dimNumeroBola">50sp</dimen>
     <dimen name="dimen_textViews_grid">20sp</dimen>
     <dimen name= "top_vertical_bola">100dp</dimen>
+    <dimen name="top_margin_number">120dp</dimen>
     <dimen name="dim_bola_grande">220dp</dimen>
     <dimen name="dim_config2">180dp</dimen>
+    <dimen name="dim_config4">220dp</dimen>
     <dimen name="dim_config">320dp</dimen>
+    <dimen name="dim_config3">360dp</dimen>
+    <dimen name="dim_config1">280dp</dimen>
     <dimen name="pantallas_media">30dp</dimen>
     <dimen name="boton_principio">35dp</dimen>
+    <dimen name="top_margin_grupo">1dp</dimen>
+    <dimen name="boton_principio1">25dp</dimen>
 </resources>

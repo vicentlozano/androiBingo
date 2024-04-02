@@ -55,7 +55,7 @@ class MainActivity :  BaseActivity() {
             startActivity(intent)
         }
         if(orientacion==2 && medidasPantalla<3) {
-            val marginBottom = resources.getDimensionPixelSize(R.dimen.boton_principio)
+            val marginBottom = resources.getDimensionPixelSize(R.dimen.boton_principio1)
             botonInicio.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = marginBottom
             }

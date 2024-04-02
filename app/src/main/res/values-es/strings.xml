@@ -27,6 +27,12 @@
     <string name="bingo_con_premio">Bingo\n%.1f</string>
     <string name="porcentaje_premios">Premios</string>
     <string name="velocidad">Velocidad</string>
+    <string name="description_contenido1"> Numero de cartones</string>
+    <string name="description_contenido2"> Precio de los cartones</string>
+    <string name="play_button">Boton Play</string>
+    <string name="description_imagen_fondo">Ilustración del título de Bingo</string>
+
+
 
 
 

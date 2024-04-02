@@ -27,5 +27,10 @@
     <string name="bingo_con_premio">Bingo\n%.1f</string>
     <string name="porcentaje_premios">Prizes</string>
     <string name="velocidad">Speed</string>
+    <string name="description_contenido1"> Number of cards</string>
+    <string name="description_contenido2"> Price of cards</string>
+    <string name="play_button">Play button</string>
+    <string name="description_imagen_fondo">Illustrated title of Bingo</string>
+
 
 </resources>
